@@ -1,6 +1,28 @@
-# Day 1 - Code Examples
+# 🚀 Day 1: React Basics - Hướng dẫn Build từng bước
 
-Các file code mẫu cho ngày 1:
+## 📋 Mục tiêu học tập
+
+Sau khi hoàn thành Day 1, bạn sẽ:
+
+- ✅ Hiểu cấu trúc cơ bản của React app
+- ✅ Biết cách tạo và sử dụng functional components
+- ✅ Nắm vững concept về props và cách truyền data
+- ✅ Có thể tạo interactive demo đầu tiên
+
+## 🛠️ Setup môi trường
+
+### Bước 1: Khởi tạo React App
+
+```bash
+# Tạo project mới
+npx create-react-app day01-react-basics
+cd day01-react-basics
+
+# Hoặc sử dụng Vite (nhanh hơn)
+npm create vite@latest day01-react-basics -- --template react
+cd day01-react-basics
+npm install
+```
 
 ## Cấu trúc thư mục
 

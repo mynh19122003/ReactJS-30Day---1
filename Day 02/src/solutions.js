@@ -1,43 +1,111 @@
-// Bài tập 1: Chuyển đổi HTML sang JSX
+// =============================================================================
+// DAY 2: JSX SYNTAX - CODE MẪU VỚI CHÚ THÍCH CHI TIẾT
+// =============================================================================
+
+// 1. IMPORT REACT (cần thiết để sử dụng JSX)
+import React from 'react';
+
+// =============================================================================
+// BÀI TẬP 1: CHUYỂN ĐỔI HTML SANG JSX
+// =============================================================================
+
 function ProductList() {
+  // 2. RETURN JSX - LƯU Ý CÁC ĐIỂM KHÁC BIỆT VỚI HTML
   return (
-    <div className="container">
+    // 3. PHẢI CÓ MỘT PARENT ELEMENT (hoặc React Fragment)
+    <div className="container"> {/* class -> className */}
+      
+      {/* 4. TIÊU ĐỀ CHÍNH */}
       <h1>Danh sách sản phẩm</h1>
+      
+      {/* 5. PRODUCT CARD */}
       <div className="product">
-        <img src="product1.jpg" alt="Sản phẩm 1" />
+        {/* 6. IMG TAG - PHẢI TỰ ĐÓNG (self-closing) */}
+        <img 
+          src="product1.jpg"      // src attribute
+          alt="Sản phẩm 1"        // alt cho accessibility
+        /> {/* Lưu ý: <img /> chứ không phải <img> */}
+        
+        {/* 7. PRODUCT INFO */}
         <h3>iPhone 15</h3>
+        
+        {/* 8. PRICE với className thay vì class */}
         <p className="price">25,000,000 VNĐ</p>
-        <button onClick={() => console.log('Thêm vào giỏ hàng')}>
+        
+        {/* 9. BUTTON với EVENT HANDLER */}
+        <button 
+          onClick={() => console.log('Thêm vào giỏ hàng')} // onClick (camelCase)
+        >
           Thêm vào giỏ hàng
         </button>
       </div>
-      <hr />
+      
+      {/* 10. HR TAG - PHẢI TỰ ĐÓNG */}
+      <hr /> {/* <hr /> chứ không phải <hr> */}
+      
+      {/* 11. FOOTER */}
       <footer>
+        {/* 12. SPECIAL CHARACTERS - sử dụng HTML entities hoặc Unicode */}
         <p>&copy; 2024 Cửa hàng điện thoại</p>
       </footer>
     </div>
   );
 }
 
-// Bài tập 2: Thông tin cá nhân
+// =============================================================================
+// BÀI TẬP 2: SỬ DỤNG BIẾN VÀ EXPRESSIONS TRONG JSX
+// =============================================================================
+
 function PersonInfo() {
+  // 13. ĐỊNH NGHĨA DATA OBJECT
+  // Trong thực tế, data này có thể đến từ API, props, hoặc state
   const person = {
     firstName: "Nguyễn",
-    lastName: "Minh",
+    lastName: "Minh", 
     age: 23,
     email: "minh.nguyen@email.com",
-    hobbies: ["đọc sách", "nghe nhạc", "du lịch"],
-    isStudent: true
+    hobbies: ["đọc sách", "nghe nhạc", "du lịch"], // Array
+    isStudent: true  // Boolean
   };
 
+  // 14. CÁC HELPER FUNCTIONS (có thể tính toán trước khi render)
+  const fullName = `${person.firstName} ${person.lastName}`;
+  const birthYear = 2024 - person.age;
+  const hobbyCount = person.hobbies.length;
+
   return (
+    // 15. CONTAINER với className
     <div className="person-card">
+      
+      {/* 16. TIÊU ĐỀ */}
       <h2>Thông tin cá nhân</h2>
-      <p><strong>Họ tên:</strong> {person.firstName} {person.lastName}</p>
-      <p><strong>Tuổi:</strong> {person.age} (sinh năm {2024 - person.age})</p>
-      <p><strong>Email:</strong> {person.email}</p>
-      <p><strong>Trạng thái:</strong> {person.isStudent ? "Sinh viên" : "Đi làm"}</p>
-      <p><strong>Số sở thích:</strong> {person.hobbies.length}</p>
+      
+      {/* 17. SỬ DỤNG BIẾN TRONG JSX với {} */}
+      <p>
+        <strong>Họ tên:</strong> {fullName} 
+        {/* Hoặc có thể viết: {person.firstName} {person.lastName} */}
+      </p>
+      
+      {/* 18. EXPRESSION TÍNH TOÁN TRỰC TIẾP */}
+      <p>
+        <strong>Tuổi:</strong> {person.age} (sinh năm {birthYear})
+      </p>
+      
+      {/* 19. EMAIL */}
+      <p>
+        <strong>Email:</strong> {person.email}
+      </p>
+      
+      {/* 20. CONDITIONAL (TERNARY) OPERATOR */}
+      <p>
+        <strong>Trạng thái:</strong> {person.isStudent ? "Sinh viên" : "Đi làm"}
+        {/* Cú pháp: condition ? trueValue : falseValue */}
+      </p>
+      
+      {/* 21. SỬ DỤNG ARRAY.LENGTH */}
+      <p>
+        <strong>Số sở thích:</strong> {hobbyCount}
+      </p>
     </div>
   );
 }

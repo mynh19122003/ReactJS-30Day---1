@@ -1,53 +1,468 @@
-# Ngày 7: Bài tập Lists and Keys
+# Ngày 7: Bài tập Lists & Keys - Advanced Dynamic Rendering
 
-## Bài tập 1: Student Management System
+## 🎯 Mục tiêu bài tập
 
-Tạo hệ thống quản lý sinh viên với đầy đủ CRUD operations:
+Thực hành rendering danh sách từ cơ bản đến nâng cao, bao gồm performance optimization, virtual scrolling, infinite loading, và complex list interactions.
 
-### Dữ liệu mẫu:
+---
 
-```javascript
-const initialStudents = [
-  {
-    id: 1,
-    name: "Nguyễn Văn An",
-    studentId: "SV001",
-    email: "an.nguyen@email.com",
-    phone: "0123456789",
-    major: "Computer Science",
-    year: 3,
-    gpa: 3.8,
-    status: "active", // active, graduated, suspended
-    enrollmentDate: "2021-09-01",
-  },
-  {
-    id: 2,
-    name: "Trần Thị Bình",
-    studentId: "SV002",
-    email: "binh.tran@email.com",
-    phone: "0987654321",
-    major: "Business Administration",
-    year: 2,
-    gpa: 3.5,
-    status: "active",
-    enrollmentDate: "2022-09-01",
-  },
-  // ... thêm nhiều sinh viên
-];
-```
+## 📋 Bài tập 1: E-commerce Product Catalog ⭐⭐
 
 ### Yêu cầu:
 
-1. **Display List:** Hiển thị danh sách sinh viên trong table
-2. **Search:** Tìm kiếm theo tên, mã SV, email
-3. **Filter:** Lọc theo major, year, status
-4. **Sort:** Sắp xếp theo tên, GPA, năm nhập học
-5. **Add:** Thêm sinh viên mới
-6. **Edit:** Chỉnh sửa thông tin sinh viên
-7. **Delete:** Xóa sinh viên (có confirm)
-8. **Bulk Actions:** Select multiple và delete selected
-9. **Pagination:** Phân trang 10 items/page
-10. **Statistics:** Hiển thị tổng số SV, GPA trung bình
+Tạo catalog sản phẩm với tính năng search, filter, và sort:
+
+- Hiển thị grid/list view switchable
+- Real-time search với debouncing
+- Multiple filters (category, price range, rating)
+- Sort functionality (price, name, rating, date)
+- Responsive design cho mobile/desktop
+
+### Acceptance Criteria:
+
+- [ ] Ít nhất 50+ sample products với complete data
+- [ ] Search hoạt động real-time với debouncing 300ms
+- [ ] Multiple filters có thể combine
+- [ ] Sort functionality with ascending/descending
+- [ ] Grid và list view modes
+- [ ] Responsive breakpoints (<768px, >768px)
+- [ ] Empty states cho các scenarios khác nhau
+
+### Sample Data Structure:
+
+```jsx
+const sampleProducts = [
+  {
+    id: "prod_001",
+    name: "iPhone 15 Pro Max",
+    category: "smartphones",
+    brand: "Apple",
+    price: 29999000,
+    originalPrice: 32999000,
+    rating: 4.8,
+    reviewCount: 1205,
+    image: "https://example.com/iphone15.jpg",
+    inStock: true,
+    isNew: true,
+    isSale: true,
+    description: "Latest iPhone with titanium design",
+    features: ["A17 Pro chip", "48MP camera", "Titanium build"],
+    addedDate: "2024-01-15",
+  },
+  // ... more products
+];
+```
+
+### Bonus features:
+
+- Compare functionality (select multiple products)
+- Recently viewed products
+- Wishlist toggle
+- Quick view modal
+- Product recommendations
+
+---
+
+## 📋 Bài tập 2: Real-time Chat với Message Threading ⭐⭐⭐
+
+### Yêu cầu:
+
+Xây dựng chat interface với nested message threads:
+
+- Message list với real-time updates
+- Thread replies (nested comments)
+- Message reactions và emoji picker
+- User typing indicators
+- Message search và filtering
+- Infinite scroll cho message history
+
+### Acceptance Criteria:
+
+- [ ] Message threading tối đa 3 levels deep
+- [ ] Real-time message updates (simulate with intervals)
+- [ ] Message reactions với emoji picker
+- [ ] Typing indicators cho multiple users
+- [ ] Search messages với highlighting
+- [ ] Infinite scroll loading older messages
+- [ ] Message status indicators (sent, delivered, read)
+- [ ] Auto-scroll to bottom cho new messages
+
+### Core Components:
+
+```jsx
+function ChatApp() {
+  // Main chat container
+}
+
+function MessageList({ messages, onReply, onReact }) {
+  // Virtualized message list
+}
+
+function MessageThread({ message, level, maxLevel }) {
+  // Recursive thread rendering
+}
+
+function MessageItem({ message, onReply, onReact, level }) {
+  // Individual message với actions
+}
+
+function MessageInput({ onSend, replyTo, onCancelReply }) {
+  // Compose new messages
+}
+
+function EmojiPicker({ onEmojiSelect, onClose }) {
+  // Emoji selection overlay
+}
+```
+
+### Advanced Features:
+
+- Message editing và deletion
+- File attachments preview
+- Message formatting (bold, italic, code)
+- @mentions với autocomplete
+- Message timestamps với relative formatting
+
+---
+
+## 📋 Bài tập 3: Virtual Data Table với Advanced Features ⭐⭐⭐⭐
+
+### Yêu cầu:
+
+Tạo data table performance cao cho large datasets:
+
+- Virtual scrolling cho 10,000+ rows
+- Column sorting và filtering
+- Column resizing và reordering
+- Row selection (single/multiple)
+- Inline editing capabilities
+- Export functionality (CSV, JSON)
+- Custom cell renderers
+
+### Acceptance Criteria:
+
+- [ ] Handle ít nhất 10,000 rows smoothly
+- [ ] Virtual scrolling với variable row heights
+- [ ] All columns sortable với visual indicators
+- [ ] Advanced filtering (text, number, date, select)
+- [ ] Drag-to-resize columns
+- [ ] Drag-to-reorder columns
+- [ ] Row selection với keyboard navigation
+- [ ] Bulk actions cho selected rows
+- [ ] Inline editing với validation
+- [ ] Export selected/filtered data
+
+### Sample Implementation:
+
+```jsx
+function VirtualDataTable({ data, columns, onRowSelect, onCellEdit }) {
+  // Virtual table implementation
+}
+
+function TableHeader({ columns, onSort, onResize, onReorder }) {
+  // Sortable, resizable, reorderable headers
+}
+
+function VirtualizedRows({ visibleData, rowHeight, onRowClick, selectedRows }) {
+  // Virtualized row rendering
+}
+
+function TableCell({ value, column, rowData, isEditing, onEdit, onSave }) {
+  // Custom cell rendering với editing
+}
+
+function TableFilters({ columns, filters, onFilterChange }) {
+  // Advanced filtering controls
+}
+```
+
+### Performance Requirements:
+
+- Smooth scrolling with 60fps
+- Memory efficient (không load all DOM nodes)
+- Fast filtering và sorting
+- Efficient re-rendering with memoization
+
+---
+
+## 📋 Bài tập 4: Kanban Board với Drag & Drop ⭐⭐⭐⭐
+
+### Yêu cầu:
+
+Xây dựng Kanban board interactive với advanced features:
+
+- Multi-column task management
+- Drag & drop between columns
+- Task cards với rich content
+- Real-time collaboration simulation
+- Task filtering và search
+- Column customization
+- Progress tracking
+
+### Acceptance Criteria:
+
+- [ ] Ít nhất 4 customizable columns (Todo, In Progress, Review, Done)
+- [ ] Drag & drop tasks between columns
+- [ ] Drag & drop để reorder trong cùng column
+- [ ] Task cards với complete information
+- [ ] Real-time updates simulation
+- [ ] Filter tasks by assignee, priority, tags
+- [ ] Search tasks với highlighting
+- [ ] Column limits và warnings
+- [ ] Progress charts và analytics
+- [ ] Keyboard accessibility
+
+### Core Features:
+
+```jsx
+function KanbanBoard({
+  columns,
+  tasks,
+  onTaskMove,
+  onTaskUpdate,
+  onColumnUpdate,
+}) {
+  // Main board layout
+}
+
+function KanbanColumn({ column, tasks, onTaskDrop, onTaskReorder }) {
+  // Droppable column container
+}
+
+function TaskCard({ task, onEdit, onDelete, isDragging }) {
+  // Draggable task card với rich content
+}
+
+function TaskDetailModal({ task, onSave, onClose }) {
+  // Detailed task editing
+}
+
+function BoardFilters({ filters, onFilterChange, users, tags }) {
+  // Advanced filtering options
+}
+```
+
+### Advanced Features:
+
+- Task dependencies visualization
+- Time tracking
+- Comment threads on tasks
+- File attachments
+- Activity history
+- Board templates
+- Custom fields
+
+---
+
+## 📋 Bài tập 5: Social Media Feed với Infinite Scroll ⭐⭐⭐⭐⭐
+
+### Yêu cầu:
+
+Tạo social feed comprehensive với advanced interactions:
+
+- Infinite scrolling feed
+- Post types (text, image, video, poll)
+- Like, comment, share functionality
+- Real-time engagement updates
+- User mentions và hashtags
+- Content filtering
+- Performance optimization
+
+### Acceptance Criteria:
+
+- [ ] Infinite scroll với smooth loading
+- [ ] Multiple post types với rich media
+- [ ] Nested comments system
+- [ ] Real-time like/comment counts
+- [ ] @mentions với user suggestions
+- [ ] #hashtag linking và trending
+- [ ] Content filtering (friends, public, etc.)
+- [ ] Image/video lazy loading
+- [ ] Optimistic UI updates
+- [ ] Error handling với retry mechanisms
+
+### Complex Implementation:
+
+```jsx
+function SocialFeed({ user, feedType, onPostCreate, onPostInteract }) {
+  // Main feed container với infinite scroll
+}
+
+function FeedPost({ post, currentUser, onLike, onComment, onShare }) {
+  // Individual post với all interactions
+}
+
+function PostComments({ postId, comments, onAddComment, onReplyComment }) {
+  // Nested comments với pagination
+}
+
+function PostCreator({ onPostSubmit, mentionSuggestions }) {
+  // Rich post creation với media upload
+}
+
+function MediaViewer({ media, onClose }) {
+  // Full-screen media viewing
+}
+
+function HashtagProcessor({ text, onHashtagClick }) {
+  // Process và highlight hashtags/mentions
+}
+```
+
+### Performance Challenges:
+
+- Virtual scrolling cho large feeds
+- Image optimization và lazy loading
+- Efficient state management
+- Memory leak prevention
+- Network request optimization
+- Cache management
+
+### Real-time Features:
+
+- Live like/comment updates
+- Typing indicators trong comments
+- New post notifications
+- Online status indicators
+- Real-time follower counts
+
+---
+
+## 🎯 Deliverables
+
+### Cho mỗi bài tập, tạo:
+
+1. **Core Implementation:**
+
+   - Main components với full functionality
+   - Custom hooks cho reusable logic
+   - Utility functions cho data processing
+   - Performance optimizations
+
+2. **Styling & UX:**
+
+   - Responsive CSS/SCSS
+   - Smooth animations và transitions
+   - Loading states và skeletons
+   - Error states với retry options
+
+3. **Testing:**
+
+   - Unit tests cho key functionality
+   - Integration tests cho user flows
+   - Performance benchmarks
+   - Accessibility testing
+
+4. **Documentation:**
+   - Component API documentation
+   - Usage examples và demos
+   - Performance optimization notes
+   - Deployment instructions
+
+---
+
+## 🏆 Evaluation Criteria
+
+### Technical Implementation (30%):
+
+- Proper key usage và list optimization
+- Performance với large datasets
+- Memory efficient rendering
+- Clean, maintainable code
+- Error handling và edge cases
+
+### User Experience (25%):
+
+- Smooth interactions và animations
+- Responsive design
+- Intuitive navigation
+- Loading states và feedback
+- Accessibility compliance
+
+### Advanced Features (25%):
+
+- Virtual scrolling implementation
+- Drag & drop functionality
+- Real-time updates simulation
+- Complex state management
+- Custom hooks và utilities
+
+### Code Quality (20%):
+
+- Component composition
+- Reusable patterns
+- Performance optimizations
+- Testing coverage
+- Documentation quality
+
+---
+
+## 📚 Technical Requirements
+
+### Performance Benchmarks:
+
+- Lists với 1000+ items: <100ms render time
+- Virtual scrolling: 60fps scrolling
+- Search debouncing: 300ms delay
+- Memory usage: <100MB cho large datasets
+
+### Browser Support:
+
+- Modern browsers (Chrome, Firefox, Safari, Edge)
+- Mobile browsers
+- Touch support cho drag & drop
+
+### Accessibility Standards:
+
+- WCAG 2.1 AA compliance
+- Keyboard navigation
+- Screen reader support
+- Focus management
+
+---
+
+## 🛠️ Suggested Tools & Libraries
+
+### Core:
+
+- React 18+ với Hooks
+- react-window/react-virtualized (virtual scrolling)
+- react-beautiful-dnd (drag & drop)
+- Intersection Observer API (infinite scroll)
+
+### Optional Enhancements:
+
+- Framer Motion (animations)
+- React Query (data fetching)
+- Zustand/Redux (state management)
+- React Hook Form (forms)
+
+### Testing:
+
+- Jest & React Testing Library
+- Cypress (E2E testing)
+- Lighthouse (performance)
+- axe-core (accessibility)
+
+---
+
+## 📈 Bonus Challenges
+
+### Performance Optimization:
+
+- Implement custom virtual scrolling
+- Add service worker caching
+- Optimize bundle size
+- Memory profiling và optimization
+
+### Advanced Features:
+
+- WebSocket integration cho real-time
+- Offline support với sync
+- Progressive Web App features
+- Advanced animations với spring physics
+
+Chúc các bạn coding vui vẻ! 🚀
 
 ### Components cần tạo:
 

@@ -1,62 +1,385 @@
-# Ngày 6: Bài tập Conditional Rendering
+# Ngày 6: Bài tập Conditional Rendering & UI State Management
 
-## Bài tập 1: User Authentication Flow
+## 🎯 Mục tiêu bài tập
 
-Tạo ứng dụng với flow đăng nhập hoàn chỉnh:
+Thực hành các patterns conditional rendering từ cơ bản đến nâng cao, bao gồm state management, loading states, error handling và responsive rendering.
 
-### Các trạng thái:
+---
 
-- **Loading:** Đang kiểm tra auth status
-- **Unauthenticated:** Hiển thị form đăng nhập/đăng ký
-- **Authenticated:** Hiển thị dashboard dựa trên role
+## 📋 Bài tập 1: Dashboard với Multiple States ⭐⭐
 
-### User roles:
+### Yêu cầu:
 
-```javascript
+Tạo một dashboard component có thể hiển thị các trạng thái khác nhau:
+
+- Loading state với skeleton UI
+- Error state với retry functionality
+- Empty state khi không có data
+- Success state với data visualization
+- Offline state khi mất kết nối
+
+### Acceptance Criteria:
+
+- [ ] Component có ít nhất 5 states khác nhau
+- [ ] Smooth transitions giữa các states
+- [ ] Retry mechanism cho error state
+- [ ] Skeleton loading animation
+- [ ] Responsive design cho mobile/desktop
+
+### Gợi ý implementation:
+
+```jsx
+const DASHBOARD_STATES = {
+  LOADING: "loading",
+  ERROR: "error",
+  EMPTY: "empty",
+  SUCCESS: "success",
+  OFFLINE: "offline",
+};
+
+function Dashboard() {
+  // State management cho multiple conditions
+  // Loading skeleton components
+  // Error retry logic
+  // Offline detection
+  // Data visualization components
+}
+```
+
+### Bonus points:
+
+- Thêm progress indicator cho loading
+- Custom error messages dựa vào error type
+- Smooth fade transitions giữa states
+- Auto-retry mechanism với exponential backoff
+
+---
+
+## 📋 Bài tập 2: Authentication & Permission System ⭐⭐⭐
+
+### Yêu cầu:
+
+Xây dựng hệ thống authentication và permission với conditional rendering:
+
+- Login/Logout functionality
+- Role-based access control (Admin, User, Guest)
+- Protected routes và components
+- Permission guards cho các features
+- Session timeout handling
+
+### Acceptance Criteria:
+
+- [ ] Multiple user roles với different permissions
+- [ ] Protected components chỉ hiển thị với proper permissions
+- [ ] Graceful fallbacks cho unauthorized access
+- [ ] Session management với automatic logout
+- [ ] Login form với validation và error handling
+
+### Components cần tạo:
+
+```jsx
+// Core authentication components
+function LoginForm() {}
+function AuthProvider() {}
+function PermissionGuard() {}
+function ProtectedRoute() {}
+
+// User role examples
 const USER_ROLES = {
   ADMIN: "admin",
   MODERATOR: "moderator",
   USER: "user",
   GUEST: "guest",
 };
+
+const PERMISSIONS = {
+  READ: "read",
+  WRITE: "write",
+  DELETE: "delete",
+  ADMIN: "admin",
+};
 ```
+
+### Bonus points:
+
+- Two-factor authentication flow
+- Remember me functionality
+- Password strength indicator
+- Account lockout after failed attempts
+
+---
+
+## 📋 Bài tập 3: Responsive E-commerce Product Grid ⭐⭐⭐⭐
 
 ### Yêu cầu:
 
-- Admin: Xem dashboard quản trị, quản lý users
-- Moderator: Xem dashboard vừa phải, quản lý content
-- User: Xem dashboard cá nhân
-- Guest: Chỉ xem public content
-- First-time user: Hiển thị welcome tour
-- Unverified email: Hiển thị banner xác nhận email
+Tạo product grid responsive với advanced filtering và conditional rendering:
 
-## Bài tập 2: E-commerce Product Display
+- Responsive layout (1-2-3-4 columns dựa vào screen size)
+- Advanced filtering system (price, category, rating, availability)
+- Search functionality với real-time results
+- Loading states cho từng operation
+- Error handling cho network requests
+- Empty states cho different scenarios
 
-Tạo component hiển thị sản phẩm với nhiều điều kiện:
+### Acceptance Criteria:
 
-### Product data:
+- [ ] Responsive grid layout với media queries
+- [ ] Multiple filter combinations
+- [ ] Search với debouncing
+- [ ] Loading states cho filtering/search
+- [ ] Different empty states (no results, no products, network error)
+- [ ] Infinite scroll hoặc pagination
+- [ ] Product quick view modal
 
-```javascript
-const product = {
-  id: 1,
-  name: "iPhone 15 Pro",
-  price: 25000000,
-  originalPrice: 28000000,
-  discount: 10,
-  inStock: true,
-  quantity: 5,
-  isNew: true,
-  isFeatured: true,
-  category: "smartphones",
-  rating: 4.5,
-  reviews: 128,
-  shipping: {
-    free: true,
-    fastDelivery: true,
-    estimatedDays: 2,
-  },
-};
+### Core Components:
+
+```jsx
+function ProductGrid() {
+  // Responsive logic
+  // Filter management
+  // Search functionality
+  // Loading states
+  // Error handling
+}
+
+function ProductCard({ product, isLoading }) {
+  // Skeleton loading state
+  // Conditional product info display
+  // Action buttons based on availability
+}
+
+function FilterSidebar() {
+  // Multiple filter types
+  // Clear filters functionality
+  // Applied filters display
+}
 ```
+
+### Advanced Features:
+
+- Sort functionality (price, rating, newest)
+- Wishlist toggle với heart animation
+- Quick add to cart
+- Price comparison với competitors
+
+---
+
+## 📋 Bài tập 4: Multi-step Form Wizard ⭐⭐⭐⭐
+
+### Yêu cầu:
+
+Xây dựng form wizard phức tạp với conditional logic:
+
+- Multi-step navigation với progress indicator
+- Dynamic step validation
+- Conditional fields dựa vào previous answers
+- Save draft functionality
+- Review step trước khi submit
+- Error handling cho từng step
+
+### Acceptance Criteria:
+
+- [ ] Ít nhất 4 steps với different form types
+- [ ] Progress indicator với step validation status
+- [ ] Conditional fields based on user input
+- [ ] Navigation với validation checks
+- [ ] Draft saving với localStorage
+- [ ] Comprehensive review step
+- [ ] Submit với loading và success states
+
+### Form Steps Example:
+
+```jsx
+const FORM_STEPS = [
+  {
+    id: 1,
+    title: "Personal Information",
+    component: PersonalInfoStep,
+    validation: personalInfoSchema,
+  },
+  {
+    id: 2,
+    title: "Address Details",
+    component: AddressStep,
+    validation: addressSchema,
+    conditional: (data) => data.personalInfo.needsShipping,
+  },
+  {
+    id: 3,
+    title: "Preferences",
+    component: PreferencesStep,
+    validation: preferencesSchema,
+  },
+  {
+    id: 4,
+    title: "Review & Submit",
+    component: ReviewStep,
+    isReview: true,
+  },
+];
+```
+
+### Advanced Features:
+
+- Step branching logic (skip steps based on conditions)
+- Real-time field validation
+- Auto-save every 30 seconds
+- Form analytics tracking
+
+---
+
+## 📋 Bài tập 5: Real-time Notification System ⭐⭐⭐⭐⭐
+
+### Yêu cầu:
+
+Tạo hệ thống notification real-time với complex conditional rendering:
+
+- Multiple notification types (success, error, warning, info)
+- Different display positions (top-right, bottom-left, center, etc.)
+- Auto-dismiss với countdown
+- Action buttons trong notifications
+- Queue management cho multiple notifications
+- Persistent vs temporary notifications
+- Do not disturb mode
+- Notification history
+
+### Acceptance Criteria:
+
+- [ ] Ít nhất 5 loại notifications khác nhau
+- [ ] Multiple display positions và animations
+- [ ] Queue system với priority handling
+- [ ] Auto-dismiss với customizable timeouts
+- [ ] Action buttons (Undo, View Details, etc.)
+- [ ] Notification persistence across page reloads
+- [ ] Sound notifications với volume control
+- [ ] Accessibility compliance (screen readers)
+
+### Core System:
+
+```jsx
+const NOTIFICATION_TYPES = {
+  SUCCESS: "success",
+  ERROR: "error",
+  WARNING: "warning",
+  INFO: "info",
+  PROMOTIONAL: "promotional",
+};
+
+const POSITIONS = {
+  TOP_RIGHT: "top-right",
+  TOP_LEFT: "top-left",
+  BOTTOM_RIGHT: "bottom-right",
+  BOTTOM_LEFT: "bottom-left",
+  CENTER: "center",
+};
+
+function NotificationSystem() {
+  // Queue management
+  // Position rendering
+  // Auto-dismiss logic
+  // Animation handling
+  // Accessibility features
+}
+
+function NotificationProvider() {
+  // Context for global notification state
+  // Add/remove notification methods
+  // Settings management
+}
+```
+
+### Advanced Features:
+
+- Notification templates cho different scenarios
+- Rich content support (images, videos, links)
+- Notification grouping và stacking
+- Real-time từ WebSocket/Server-Sent Events
+- Notification scheduling
+- A/B testing cho notification content
+
+---
+
+## 🎯 Deliverables
+
+### Cho mỗi bài tập, tạo:
+
+1. **Component Files:**
+
+   - Main component với full implementation
+   - Supporting components và utilities
+   - Style files (CSS/SCSS)
+
+2. **Documentation:**
+
+   - README với setup instructions
+   - Component API documentation
+   - Usage examples
+
+3. **Testing:**
+
+   - Unit tests cho main functionality
+   - Integration tests cho user flows
+   - Accessibility tests
+
+4. **Demo:**
+   - Working demo với sample data
+   - Interactive examples
+   - Mobile responsive testing
+
+---
+
+## 🏆 Evaluation Criteria
+
+### Code Quality (25%):
+
+- Clean, readable code với proper naming
+- Proper separation of concerns
+- Error handling và edge cases
+- Performance optimization
+
+### Functionality (25%):
+
+- All requirements implemented correctly
+- Smooth user experience
+- Responsive design
+- Accessibility compliance
+
+### UI/UX Design (25%):
+
+- Intuitive user interface
+- Consistent design system
+- Smooth animations và transitions
+- Mobile-first approach
+
+### Advanced Features (25%):
+
+- Creative solutions cho complex problems
+- Performance optimizations
+- Enhanced user experience
+- Scalable architecture
+
+---
+
+## 📚 Tài liệu hỗ trợ
+
+- [React Conditional Rendering Guide](https://reactjs.org/docs/conditional-rendering.html)
+- [State Management Patterns](https://kentcdodds.com/blog/application-state-management-with-react)
+- [Accessibility Best Practices](https://web.dev/accessibility/)
+- [Performance Optimization](https://web.dev/react/)
+- [Responsive Design Guidelines](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/CSS_Grid_and_Progressive_Enhancement)
+
+Chúc các bạn coding vui vẻ! 🚀
+rating: 4.5,
+reviews: 128,
+shipping: {
+free: true,
+fastDelivery: true,
+estimatedDays: 2,
+},
+};
+
+````
 
 ### Conditional displays:
 
@@ -98,7 +421,7 @@ const weatherData = {
     level: "moderate", // good, moderate, unhealthy
   },
 };
-```
+````
 
 ### Conditional elements:
 
